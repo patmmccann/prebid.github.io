@@ -901,7 +901,7 @@ getFloor takes in a single object with the following params:
 {% highlight js %}
 getFloor({
     currency: string,
-    mediaType: string  //Required
+    mediaType: string  
     size : [ w, h] OR "*"
 });
 {% endhighlight %}
@@ -910,8 +910,8 @@ getFloor({
 | Param | Type | Description | Default |
 |---+---+---+---|
 | bidRequest | object | bidRequest object passed to buildRequests function | none |
-| mediaType | string | The media type within the current bidRequest context to receive a floor from the Floors Module. Floors Module will return best matching floor. Possible values are one of “banner”, “video”, “Native” or "\*" | "banner" |
-| size | Size array or ‘\*’ (required) | The size within the current bidRequest context to receive a floor from the Floors Module. Defaults to ‘\*’Array of size [w, h] for a specific size. If your bid adapter cannot handle size specific floors, use ‘\*’ to retrieve catch all size floor if defined by the publisher or floor provider | "\*" |
+| mediaType | string | The media type within the current bidRequest context to receive a floor from the Floors Module. Floors Module will return best matching floor. Possible values are one of “banner”, “video”, “Native” or "*" | "banner" |
+| size | Size array or ‘\*’ (optional) | The size within the current bidRequest context to receive a floor from the Floors Module. Defaults to ‘\*’Array of size [w, h] for a specific size. If your bid adapter cannot handle size specific floors, use ‘\*’ to retrieve catch all size floor if defined by the publisher or floor provider | "*" |
 | currency | String | The desired currency to return the floor in. Please refer to the currency section to understand how currency conversion is applied. If no currency is supplied, the floor module will assume USD. If the Floor Module cannot convert a floor to the supplied currency, bid adapters will be required to handle the supplied floor. | "USD" |
 
 #### getFloor Response
@@ -921,7 +921,7 @@ getFloor({
     currency: string,
     floor: float
 }
-{% endhighlight %}
+{% endhighlight %}https://docs.prebid.org/dev-docs/modules/floors.html
 
 Or empty object if a floor was not found for a given input
 
@@ -959,8 +959,8 @@ getFloor for media type Banner for a bid request in the context of the gpt slot 
 {% highlight js %}
 getFloor({
     currency: 'USD',
-    mediatype: ‘banner’,
-    Size: ‘*’
+    mediaType: 'banner',
+    Size: '*'
 });
 {% endhighlight %}
 
@@ -991,7 +991,7 @@ getFloor for media type Banner for a bid requests in the context of the gpt slot
 getFloor({
     currency: 'USD',
     size: [300,600],
-    mediatype: ‘banner’
+    mediaType: 'banner'
 });
 {% endhighlight %}
 
@@ -1013,7 +1013,7 @@ For a bid adapter who does not wish to handle making a request for each size in 
       let floorInfo = bidRequest.getFloor({
         currency: 'USD',
         mediaType: 'banner',
-        size: '\*'
+        size: '*'
       });
       data['adapter_floor'] = floorInfo.currency === 'USD' ? floorInfo.floor : undefined;
     }
@@ -1075,13 +1075,13 @@ The job of the getFloor method is to retrieve an appropriate floor for the reque
 If a currency conversion is successful in getFloor, the resulting floor will be returned to the requesting Bid Adapter. If the conversion failed, the Floors Module will return the original floor currency defined within the selected rule location data set.
 
 Example Rule:
-currency = ‘USD’,
-‘banner|300x250’: 1.00
+currency = 'USD',
+'banner|300x250': 1.00
 
 {% highlight js %}
 getFloor({
-  currency: ‘EUR’,
-  mediaType: ‘banner’,
+  currency: 'EUR',
+  mediaType: 'banner',
   size: [300, 250]
 });
 {% endhighlight %}
@@ -1091,7 +1091,7 @@ If successfully returned the requested currency:
 {% highlight js %}
 {
   floor: 0.85,
-  currency: ‘EUR’
+  currency: 'EUR'
 }
 {% endhighlight %}
 
