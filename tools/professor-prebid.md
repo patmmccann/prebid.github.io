@@ -138,7 +138,7 @@ The UI of the User Sync Network Inspector:
 
 The Request Chain
 
-Data for each resource on a request chain is taken from that resources HAR entry (For more info on HAR entries, see: [http://www.softwareishard.com/blog/har-12-spec](http://www.softwareishard.com/blog/har-12-spec))
+Data for each resource on a request chain is taken from that resources HAR entry (For more info on HAR entries, see: [https://www.softwareishard.com/blog/har-12-spec](https://www.softwareishard.com/blog/har-12-spec))
 
 If a user sync root URL resource is loaded on a webpage, the final resulting request chain object will look like the following (the “redirectsTo” and “initiated” fields can contain zero to many nested resources as values):
 ![Request Chain Example](/assets/images/tools/professor-prebid-12.png)
